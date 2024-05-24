@@ -5,7 +5,7 @@ export class MainPage extends BasePage {
 	readonly feed: Locator;
 	readonly searchInput: Locator;
 	readonly alternativeContent: Locator;
-	readonly profileBtn: Locator;
+	readonly _profileBtn: Locator;
 	readonly friendsBtn: Locator;
 	readonly photoBtn: Locator;
 
@@ -18,7 +18,7 @@ export class MainPage extends BasePage {
 		this.alternativeContent = page.locator(
 			"xpath=.//*[@id='hook_Block_AlternativeContent'"
 		);
-		this.profileBtn = page.locator(
+		this._profileBtn = page.locator(
 			"xpath=.//div[@class='navigation']//a[contains(@data-l,'userPage')]"
 		);
 		this.friendsBtn = page.locator(
@@ -44,8 +44,8 @@ export class MainPage extends BasePage {
 		await this.pressSearchBtn();
 	}
 
-	getProfileBtn(): Locator {
-		return this.profileBtn;
+	get profileBtn(): Locator {
+		return this._profileBtn;
 	}
 
 	async openFriends() {
