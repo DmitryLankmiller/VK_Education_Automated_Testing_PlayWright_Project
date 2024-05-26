@@ -2,12 +2,13 @@ import { expect, type Locator, type Page } from '@playwright/test';
 import { BasePage } from './base.page';
 
 export class MainPage extends BasePage {
-	readonly feed: Locator;
-	readonly searchInput: Locator;
-	readonly alternativeContent: Locator;
-	readonly _profileBtn: Locator;
-	readonly friendsBtn: Locator;
-	readonly photoBtn: Locator;
+	private readonly _profileBtn: Locator;
+	private readonly feed: Locator;
+	private readonly searchInput: Locator;
+	private readonly alternativeContent: Locator;
+	private readonly friendsBtn: Locator;
+	private readonly photoBtn: Locator;
+	private readonly musicBtn: Locator;
 
 	constructor(page: Page) {
 		super(page);
@@ -27,6 +28,13 @@ export class MainPage extends BasePage {
 		this.photoBtn = page.locator(
 			"xpath=.//div[@class='navigation']//a[contains(@data-l,'userPhoto')]"
 		);
+		this.musicBtn = page.locator(
+			"xpath=.//*[@id='hook_Block_MusicToolbarButton']"
+		);
+	}
+
+	get profileBtn(): Locator {
+		return this._profileBtn;
 	}
 
 	async setValueToSearchBar(value: string) {
@@ -44,16 +52,16 @@ export class MainPage extends BasePage {
 		await this.pressSearchBtn();
 	}
 
-	get profileBtn(): Locator {
-		return this._profileBtn;
-	}
-
 	async openFriends() {
-		this.friendsBtn.click();
+		await this.friendsBtn.click();
 	}
 
 	async openPhoto() {
-		this.friendsBtn.click();
+		await this.photoBtn.click();
+	}
+
+	async openMusic() {
+		await this.musicBtn.click();
 	}
 
 	async checkPage() {
