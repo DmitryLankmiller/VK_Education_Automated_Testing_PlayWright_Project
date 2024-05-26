@@ -11,7 +11,7 @@ export class MusicPage extends BasePage {
 		super(page);
 		this.musicVolume = page.locator("xpath=.//wm-range[@class='volume']");
 		this.rangeController = this.musicVolume.locator(
-			"xpath=//*[@class='range-bar']"
+			"xpath=//*[@class='range-bar']/input"
 		);
 		this.playBtn = page.locator(
 			"xpath=.//wm-player//*[@data-tsid='play_button']"
@@ -30,7 +30,7 @@ export class MusicPage extends BasePage {
 		expect(width !== undefined && width > 0).toBeTruthy();
 		await this.rangeController.click({
 			force: true,
-			position: { x: width, y: 0 },
+			position: { x: width - 1, y: 0 },
 		});
 	}
 
