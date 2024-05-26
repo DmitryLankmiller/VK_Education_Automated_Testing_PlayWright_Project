@@ -8,9 +8,10 @@ const BOT_WRONG_PASSWORD = 'qwerty';
 
 test.describe('Testing logging page', () => {
 	let loginPage: LoginPage;
+
 	test.beforeEach(async ({ page }) => {
-		loginPage = new LoginPage(page);
 		await page.goto('/');
+		loginPage = new LoginPage(page);
 	});
 
 	test('Log in', async ({ page }) => {
