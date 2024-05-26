@@ -17,4 +17,11 @@ test.describe('Testing music page', () => {
 		expect(progress, "Couldn't get value of the volume").toBeGreaterThanOrEqual(0);
 		expect(progress, 'Value of the volume should be zero').toBe(0);
 	});
+
+    test('Volume on', async () => {
+		await musicPage.dragRangeControllerOn();
+		let progress = await musicPage.getMusicVolumeValue();
+		expect(progress, "Couldn't get value of the volume").toBeGreaterThanOrEqual(0);
+		expect(progress, 'Value of the volume should be zero').toBe(100);
+	});
 });

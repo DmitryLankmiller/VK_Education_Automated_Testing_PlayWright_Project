@@ -21,16 +21,17 @@ export class MusicPage extends BasePage {
 	}
 
 	public async dragRangeControllerOff() {
-		// let box = await this.rangeController.boundingBox();
-		// let width: number = box === null ? 0 : box.width;
-		// expect(width !== undefined && width > 0).toBeTruthy();
-		// await this.rangeController.click({
-		// 	force: true,
-		// 	position: { x: width, y: 0 },
-		// });
-		// await this.page.mouse.down();
 		await this.rangeController.click({ force: true, position: { x: 0, y: 0 } });
-		// await this.page.mouse.up();
+	}
+
+	public async dragRangeControllerOn() {
+		let box = await this.rangeController.boundingBox();
+		let width: number = box === null ? 0 : box.width;
+		expect(width !== undefined && width > 0).toBeTruthy();
+		await this.rangeController.click({
+			force: true,
+			position: { x: width, y: 0 },
+		});
 	}
 
 	public async getMusicVolumeValue() {
