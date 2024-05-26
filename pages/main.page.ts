@@ -1,5 +1,6 @@
 import { expect, type Locator, type Page } from '@playwright/test';
 import { BasePage } from './base.page';
+import { MusicPage } from './music.page';
 
 export class MainPage extends BasePage {
 	private readonly _profileBtn: Locator;
@@ -29,7 +30,7 @@ export class MainPage extends BasePage {
 			"xpath=.//div[@class='navigation']//a[contains(@data-l,'userPhoto')]"
 		);
 		this.musicBtn = page.locator(
-			"xpath=.//*[@id='hook_Block_MusicToolbarButton']"
+			"xpath=.//*[@id='music_toolbar_button']/.."
 		);
 	}
 
@@ -61,12 +62,14 @@ export class MainPage extends BasePage {
 	}
 
 	async openMusic() {
-		await this.musicBtn.click();
+		await this.page.goto('/music');
+		return new MusicPage(this.page);
 	}
 
 	async checkPage() {
 		await expect(this.feed.isVisible()).toBeTruthy();
 		await expect(this.profileBtn.isEnabled()).toBeTruthy();
 		await expect(this.friendsBtn.isEnabled()).toBeTruthy();
+		await expect(this.musicBtn.isEnabled()).toBeTruthy();
 	}
 }
